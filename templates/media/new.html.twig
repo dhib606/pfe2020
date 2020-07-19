@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Media{% endblock %}
+
+{% block body %}
+    <section id="portfolio" class="portfolio">
+        <div class="container" data-aos="fade-up">
+            <h1> Ajouter Article</h1>
+        </div>
+        <div class="container">
+            {{ include('media/_form.html.twig') }}
+        </div>
+    </section>
+{% endblock %}

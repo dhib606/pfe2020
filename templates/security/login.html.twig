@@ -1,0 +1,85 @@
+
+
+
+
+{% block title %}
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Login - Free Bulma template</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet"> -->
+    <link href="https://fonts.googleapis.com/css?family=Questrial&display=swap" rel="stylesheet">
+    <!-- Bulma Version 0.8.2-->
+    <link rel="stylesheet" href="https://unpkg.com/bulma@0.8.2/css/bulma.min.css" />
+    <link rel="stylesheet" type="text/css" href="../css/login.css">
+</head>
+
+{% endblock %}
+
+{% block body %}
+<form method="post">
+    {% if error %}
+        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    {% endif %}
+
+    {% if app.user %}
+        <div class="mb-3">
+            You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
+        </div>
+    {% endif %}
+    <section class="hero is-success is-fullheight">
+        <div class="hero-body">
+            <div class="container has-text-centered">
+                <div class="column is-4 is-offset-4">
+                    <h3 class="title has-text-black">Login</h3>
+                    <hr class="login-hr">
+                    <p class="subtitle has-text-black">connectez-vous pour continuer</p>
+                    <div class="box">
+                        <figure class="avatar">
+                            <img src="img/dec/i11.png">
+                        </figure>
+                        <form>
+                            <div class="field">
+                                <div class="control">
+								<label for="inputUsername">Username</label>
+                                <input class="input is-large" type="text" value="{{ last_username }}" name="username" id="inputUsername" class="form-control" required autofocus>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <div class="control">
+								    <label for="inputPassword">Password</label>
+                                    <input class="input is-large" type="password" name="password" id="inputPassword" class="form-control" required>
+                                </div>
+								{% if csrf_token('authenticate') %}
+<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}" />
+{% endif %}
+                            </div>
+                            <div class="field">
+                                <label class="checkbox">
+                                 <input type="checkbox">
+                                   se Souvenir de moi
+                                      </label>
+                            </div>
+                            <button class="btn btn-lg btn-primary" type="submit">
+                            Sign in
+                            </button>
+                        </form>
+                    </div>
+                    <p class="has-text-grey">
+                        <a href="{{ path('app_register')}}">Inscrivez-vous</a> 
+                        <a href="../">Mot de passe oubliée</a>
+                        <a href="../">AIDE?</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script async type="text/javascript" src="../js/bulma.js"></script>
+</body>
+{% endblock %}
+
+
+
+
