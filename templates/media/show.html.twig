@@ -7,20 +7,23 @@
     <section id="portfolio" class="portfolio">
         <div class="container" data-aos="fade-up">
             <div class="section-header">
-                <h3 class="section-title">Media</h3>
+                <h3 class="section-title">Article</h3>
                 <p class="section-description">Tataouine, anciennement appelée Foum Tataouine, est une ville du sud-est de la Tunisie située à 531 kilomètres de Tunis. Chef-lieu du gouvernorat du même nom, elle constitue une municipalité comptant 66 924 habitants en 2014
             </div>
-            <a href="{{ path('media_new') }}" class="btn btn-primary">Ajouter Media</a></p>
+            {% if is_granted('ROLE_USER') %}
+                <a href="{{ path('media_new') }}" class="btn btn-primary">Ajouter Media</a></p>
+            {% endif %}
             <h1>{{ medium.title }}</h1>
-            <img src="{{ vich_uploader_asset(medium, 'nameFile')}}">
+            <img src="{{ vich_uploader_asset(medium, 'nameFile')}}" width="400px">
             <p>{{ medium.content }}</p>
 
 
 
 
 
-            <a href="{{ path('media_edit', {'id': medium.id}) }}">edit</a>
-
-            <a href="{{ path('media_index') }}" class="btn btn-secondary">Retour</a>
-            {{ include('media/_delete_form.html.twig') }}
+            {% if is_granted('ROLE_USER') %}
+                <a href="{{ path('media_index') }}" class="btn btn-secondary">Retour</a>
+                <a href="{{ path('media_edit', {'id': medium.id}) }}" class="btn btn-primary">Modifier</a>
+                {{ include('media/_delete_form.html.twig') }}
+            {% endif %}
         {% endblock %}

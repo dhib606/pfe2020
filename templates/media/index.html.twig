@@ -15,14 +15,12 @@
             {% endif %}
 
             <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="200">
-                {% for medium in media %}
-                    <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-                        <img src="{{ vich_uploader_asset(medium, 'nameFile')}}" class="img-fluid" alt="">
-                        <div class="portfolio-info">
-                            <p>{{ medium.content }}</p>
-                            <a href="{{ path('media_show', {'id': medium.id}) }}" class="details-link"><i class="bx bx-link"></i></a>
+                {% for medium in media|sort|reverse %}
+                    <a href="{{ path('media_show', {'id': medium.id}) }}" class="details-link">
+                        <div class="col-lg-4 col-md-6 portfolio-item filter-app">
+                            <img src="{{ vich_uploader_asset(medium, 'nameFile')}}" class="img-fluid" alt="" >
                         </div>
-                    </div>
+                    </a>
                 {% endfor %}
 
             </div>
